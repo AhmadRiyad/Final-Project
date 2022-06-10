@@ -1,60 +1,31 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Photo extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      this.belongsTo(models.User,{
-        foreignKey: 'UserId',
-        as: "User"
-      })
-      this.hasMany(models.Comment, {
-        foreignKey: 'PhotoId',
-        as: 'Comment'
-      })
-      // this.belongsTo(models.Comment, {
-      //   foreignKey: 'PhotoId',
-      //   as: 'Comments'
-      // })
+    class photo extends Model {
+        /**
+         * Helper method for defining associations.
+         * This method is not a part of Sequelize lifecycle.
+         * The `models/index` file will call this method automatically.
+         */
+        static associate(models) {
+            this.hasMany(models.comment, {
+                as: "comments",
+                foreignKey: "photo_id",
+            });
+            this.belongsTo(models.user, {
+                as: "user",
+                foreignKey: "user_id",
+            });
+        }
     }
-  }
-  Photo.init({
-    title: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true
-      }
-    },
-    caption: {
-      type: DataTypes.TEXT,
-      validate: {
-        notEmpty: true
-      }
-    },
-    poster_image_url: {
-      type: DataTypes.TEXT,
-      validate: {
-        isUrl: true,
-        notEmpty: true
-      }
-    },
-    UserId: {
-      type: DataTypes.INTEGER,
-      validate: {
-        isInt: true,
-        notEmpty: true
-      }
-    }
-  }, {
-    sequelize,
-    modelName: 'Photo',
-  });
-  return Photo;
+    photo.init({
+        title: DataTypes.STRING,
+        caption: DataTypes.TEXT,
+        poster_image_url: DataTypes.TEXT,
+        user_id: DataTypes.INTEGER,
+    }, {
+        sequelize,
+        modelName: "photo",
+    });
+    return photo;
 };

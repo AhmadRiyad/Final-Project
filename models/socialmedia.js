@@ -1,47 +1,26 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class SocialMedia extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      this.belongsTo(models.User, {
-        foreignKey: 'UserId',
-        as: 'User'
-      })
+    class socialmedia extends Model {
+        /**
+         * Helper method for defining associations.
+         * This method is not a part of Sequelize lifecycle.
+         * The `models/index` file will call this method automatically.
+         */
+        static associate(models) {
+            this.belongsTo(models.user, {
+                as: "user",
+                foreignKey: "user_id",
+            });
+        }
     }
-  }
-  SocialMedia.init({
-    name: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true
-      }
-    },
-    social_media_url: {
-      type: DataTypes.TEXT,
-      validate: {
-        isUrl: true,
-        notEmpty: true
-      }
-    },
-    UserId: {
-      type: DataTypes.INTEGER,
-      validate: {
-        isInt: true,
-        notEmpty: true
-      }
-    }
-  }, {
-    sequelize,
-    modelName: 'SocialMedia',
-    freezeTableName: true
-  });
-  return SocialMedia;
+    socialmedia.init({
+        name: DataTypes.STRING,
+        user_id: DataTypes.INTEGER,
+        social_media_url: DataTypes.TEXT,
+    }, {
+        sequelize,
+        modelName: "socialmedia",
+    });
+    return socialmedia;
 };

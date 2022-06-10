@@ -1,41 +1,38 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      this.hasMany(models.Photo, {
-        as : "photos",
-        foreignKey : "UserId"
-      })
-      this.hasMany(models.SocialMedia, {
-        foreignKey: 'UserId',
-        as: 'SocialMedia'
-      })
-      this.hasMany(models.Comment, {
-        foreignKey: 'UserId',
-        as: 'User'
-      })
+    class user extends Model {
+        /**
+         * Helper method for defining associations.
+         * This method is not a part of Sequelize lifecycle.
+         * The `models/index` file will call this method automatically.
+         */
+        static associate(models) {
+            this.hasMany(models.photo, {
+                    as: "photos",
+                    foreignKey: "user_id",
+                }),
+                this.hasMany(models.comment, {
+                    as: "comments",
+                    foreignKey: "user_id",
+                }),
+                this.hasMany(models.socialmedia, {
+                    as: "socialmedias",
+                    foreignKey: "user_id",
+                });
+        }
     }
-  }
-  User.init({
-    full_name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    profile_image_url: DataTypes.TEXT,
-    age: DataTypes.INTEGER,
-    phone_number: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
-  return User;
+    user.init({
+        full_name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        username: DataTypes.STRING,
+        password: DataTypes.STRING,
+        profile_image_url: DataTypes.TEXT,
+        age: DataTypes.INTEGER,
+        phone_number: DataTypes.NUMBER,
+    }, {
+        sequelize,
+        modelName: "user",
+    });
+    return user;
 };

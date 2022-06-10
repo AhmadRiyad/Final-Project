@@ -1,43 +1,41 @@
 {
-  "name": "final-project-2",
+  "name": "mygram",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "- https://casper-my-gram.herokuapp.com/",
+  "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test npx jest --detectOpenHandles",
-    "start": "node .",
-    "dev": "nodemon app.js",
-    "db:create": "npx sequelize-cli db:create",
-    "db:create:migrate": "sequelize migration:generate --name",
-    "db:migrate": "npx sequelize-cli db:migrate",
-    "db:rollback": "npx sequelize-cli db:migrate:undo:all",
-    "db:seed": "npx sequelize-cli db:seed:all"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/injs-ks-002/final-project-2.git"
+    "start": "node index.js",
+    "db:create:test": "NODE_ENV=test npx sequelize db:create",
+    "db:migrate:test": "NODE_ENV=test npx sequelize db:migrate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/injs-ks-002/final-project-2/issues"
-  },
-  "homepage": "https://github.com/injs-ks-002/final-project-2#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
-    "express": "^4.18.0",
-    "express-validator": "^6.14.0",
-    "jest": "^28.1.0",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "node-mocks-http": "^1.11.0",
     "pg": "^8.7.3",
     "sequelize": "^6.19.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
+    "jest": "^28.1.0",
+    "node-mocks-http": "^1.11.0",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.3"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmadRiyad/Final-Project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AhmadRiyad/Final-Project/issues"
+  },
+  "homepage": "https://github.com/AhmadRiyad/Final-Project#readme"
 }
